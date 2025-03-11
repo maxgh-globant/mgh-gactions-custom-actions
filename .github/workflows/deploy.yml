@@ -62,7 +62,7 @@ jobs:
           path: ./dist
       - name: Output contents
         run: ls
-      - name: Deploy site
+      - name: Deploy site Js
         id: deploy
         uses: ./.github/actions/deploy-s3-javascript
         env:
@@ -72,7 +72,20 @@ jobs:
           bucket: my-bucket-name
           dist-folder: ./dist
           # bucket-region: us-east-2 
-      - name: Output information
+      - name: Output information js
+        run: |
+          echo "LIVE URL: ${{ steps.deploy.outputs.website-url }}"
+      - name: Deploy site Docker
+        id: deploy
+        uses: ./.github/actions/deploy-s3-docker
+        env:
+          AWS_ACCESS_KEY: ${{ secrets.MYACCESSKEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.MYAWSACCESSKEY }}
+        with:
+          bucket: my-bucket-name
+          dist-folder: ./dist
+          # bucket-region: us-east-2 
+      - name: Output information Docker
         run: |
           echo "LIVE URL: ${{ steps.deploy.outputs.website-url }}"
   # information:
