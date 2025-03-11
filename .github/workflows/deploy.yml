@@ -63,7 +63,7 @@ jobs:
       - name: Output contents
         run: ls
       - name: Deploy site Js
-        id: deploy
+        id: deployjs
         uses: ./.github/actions/deploy-s3-javascript
         env:
           AWS_ACCESS_KEY: ${{ secrets.MYACCESSKEY }}
@@ -74,9 +74,9 @@ jobs:
           # bucket-region: us-east-2 
       - name: Output information js
         run: |
-          echo "LIVE URL: ${{ steps.deploy.outputs.website-url }}"
+          echo "LIVE URL: ${{ steps.deployjs.outputs.website-url }}"
       - name: Deploy site Docker
-        id: deploy
+        id: deploydocker
         uses: ./.github/actions/deploy-s3-docker
         env:
           AWS_ACCESS_KEY: ${{ secrets.MYACCESSKEY }}
@@ -87,7 +87,7 @@ jobs:
           # bucket-region: us-east-2 
       - name: Output information Docker
         run: |
-          echo "LIVE URL: ${{ steps.deploy.outputs.website-url }}"
+          echo "LIVE URL: ${{ steps.deploydocker.outputs.website-url }}"
   # information:
   #   runs-on: ubuntu-latest
   #   steps:
