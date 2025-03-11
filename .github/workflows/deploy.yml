@@ -63,7 +63,7 @@ jobs:
       - name: Output contents
         run: ls
       - name: Deploy site
-        run: ./.github/actions/deploy-s3-javascript
+        uses: ./.github/actions/deploy-s3-javascript
         env:
           AWS_ACCESS_KEY: ${{ secrets.MYACCESSKEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.MYAWSACCESSKEY }}
